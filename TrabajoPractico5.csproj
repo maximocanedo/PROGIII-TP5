@@ -67,9 +67,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AgregarSucursal.aspx" />
+    <Content Include="index.js" />
+    <Content Include="ListadoSucursales.aspx" />
+    <Content Include="styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgregarSucursal.aspx.cs">
+      <DependentUpon>AgregarSucursal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarSucursal.aspx.designer.cs">
+      <DependentUpon>AgregarSucursal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoSucursales.aspx.cs">
+      <DependentUpon>ListadoSucursales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoSucursales.aspx.designer.cs">
+      <DependentUpon>ListadoSucursales.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

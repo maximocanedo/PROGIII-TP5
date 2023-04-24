@@ -18,9 +18,9 @@
     <form id="form1" action="#" class="agregarSucursal" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="links-container">
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./AgregarSucursal.html">Agregar sucursal</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./ListadoSucursales.html">Listado de sucursales</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./EliminarSucursal.html">Eliminar sucursal</asp:HyperLink>
+            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./AgregarSucursal.aspx">Agregar sucursal</asp:HyperLink>
+            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./ListadoSucursales.aspx">Listado de sucursales</asp:HyperLink>
+            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./EliminarSucursal.aspx">Eliminar sucursal</asp:HyperLink>
         </div>
         <br>
         <h1 class="mdc-typography--headline4">Grupo N.º 5</h1>

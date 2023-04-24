@@ -73,3 +73,6 @@ th {
     align-items: center;
     gap: 24px;
 }
+.mdc-delete {
+    background: #f44336 !important;
+}

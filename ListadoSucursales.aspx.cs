@@ -13,7 +13,7 @@ namespace TrabajoPractico5 {
         public string Direccion { get; set; }
     }
     public partial class ListadoSucursales : System.Web.UI.Page {
-        public void MostrarMensaje(string mensaje) {
+        private void MostrarMensaje(string mensaje) {
             string script = "MostrarMensaje('" + mensaje + "');";
             ScriptManager.RegisterStartupScript(this, GetType(), "MostrarMensaje", script, true);
         }

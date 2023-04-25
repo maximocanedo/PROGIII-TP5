@@ -17,14 +17,9 @@
 <body>
     <form id="form1" action="#" class="agregarSucursal" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="links-container">
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./AgregarSucursal.aspx">Agregar sucursal</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./ListadoSucursales.aspx">Listado de sucursales</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./EliminarSucursal.aspx">Eliminar sucursal</asp:HyperLink>
-        </div>
+        
         <br>
-        <h1 class="mdc-typography--headline4">Grupo N.º 5</h1>
-        <h2 class="mdc-typography--subtitle1">Agregar sucursal</h2>
+        <h1 class="mdc-typography--headline4">Agregar una sucursal</h1>
         <br />
         <label class="mdc-text-field mdc-text-field--outlined">
             <span class="mdc-notched-outline">
@@ -80,7 +75,7 @@
             <asp:TextBox ID="tbDireccion" CssClass="mdc-text-field__input" aria-labelledby="direccion" runat="server"></asp:TextBox>
         </label>
         <br />
-        <asp:Button ID="btnAceptar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
+        <asp:LinkButton ID="btnAceptar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

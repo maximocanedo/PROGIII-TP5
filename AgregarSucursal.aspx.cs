@@ -19,7 +19,11 @@ namespace TrabajoPractico5 {
              * tbDireccion (TextBox)
              * btnAceptar (Button)
              */
-            
+            Negocio sucursal = new Negocio();
+            ddlProvincias.DataSource = sucursal.ObtenerProvincias();
+            ddlProvincias.DataTextField = "DescripcionProvincia";
+            ddlProvincias.DataValueField = "Id_Provincia";
+            ddlProvincias.DataBind();
         }
         protected void LimpiarCampos() {
             tbNombreSucursal.Text = "";
@@ -29,7 +33,16 @@ namespace TrabajoPractico5 {
 
         }
         protected void btnAceptar_Click(object sender, EventArgs e) {
-            MostrarMensaje("El registro se subió correctamente."); // Ejemplo de cómo usar MostrarMensaje. (¡Probalo!)
+            Negocio sucursal = new Negocio();
+            string nombre = tbNombreSucursal.Text;
+            string descripcion = tbDescripcion.Text;
+            string provincia = ddlProvincias.SelectedValue;
+            string direccion = tbDireccion.Text;
+            if(sucursal.AgregarSucursal(nombre, descripcion, provincia, direccion) != 0) {
+                MostrarMensaje("El registro se subió correctamente.");
+            } else {
+                MostrarMensaje("Hubo un problema al intentar escribir en la base de datos. ");
+            }
             LimpiarCampos();
         }
     }

@@ -17,7 +17,13 @@ namespace TrabajoPractico5 {
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e) {
-            MostrarMensaje("Registro eliminado con éxito.");
+            Negocio sucursal = new Negocio();
+            string id = tbIDSucursal.Text;
+            if (sucursal.EliminarSucursal(id) == 1) {
+                MostrarMensaje("Registro eliminado con éxito.");
+            } else {
+                MostrarMensaje("Hubo un problema al intentar eliminar el registro.");
+            }
         }
     }
 }

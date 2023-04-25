@@ -17,14 +17,8 @@
 <body>
     <form id="form1" class="agregarSucursal" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <div class="links-container">
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./AgregarSucursal.aspx">Agregar sucursal</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./ListadoSucursales.aspx">Listado de sucursales</asp:HyperLink>
-            <asp:HyperLink runat="server" CssClass="mdc-chip" href="./EliminarSucursal.aspx">Eliminar sucursal</asp:HyperLink>
-        </div>
         <br>
-        <h1 class="mdc-typography--headline4">Grupo N.º 5</h1>
-        <h2 class="mdc-typography--subtitle1">Listado de sucursales</h2>
+        <h1 class="mdc-typography--headline4">Listado de sucursales</h1>
         <div class="flex-horizontal">
             <label class="mdc-text-field mdc-text-field--outlined">
                 <span class="mdc-notched-outline">
@@ -36,10 +30,10 @@
                 </span>
                 <asp:TextBox ID="tbBuscarPorID" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
               </label>
-            <asp:Button ID="btnBuscar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
+            <asp:LinkButton ID="btnBuscar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
         </div>
         <br />
-        <asp:GridView ID="GridView1" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
+        <asp:GridView ID="gvSucursales" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

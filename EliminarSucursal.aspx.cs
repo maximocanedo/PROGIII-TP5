@@ -17,7 +17,7 @@ namespace TrabajoPractico5 {
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e) {
-            MostrarMensaje("Registro eliminado con éxito.");
+            MostrarMensaje("¡Evento click del @btnEliminar activado!");
         }
     }
 }

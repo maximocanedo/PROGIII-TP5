@@ -36,7 +36,7 @@ namespace TrabajoPractico5 {
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e) {
-            MostrarMensaje("¡Evento click del btnBuscar activado!");
+            MostrarMensaje("¡Evento click del @btnBuscar activado!");
         }
     }
 }

@@ -29,7 +29,7 @@ namespace TrabajoPractico5 {
 
         }
         protected void btnAceptar_Click(object sender, EventArgs e) {
-            MostrarMensaje("El registro se subió correctamente."); // Ejemplo de cómo usar MostrarMensaje. (¡Probalo!)
+            MostrarMensaje("¡Evento click del @btnAceptar activado!"); // Ejemplo de cómo usar MostrarMensaje. (¡Probalo!)
             LimpiarCampos();
         }
     }

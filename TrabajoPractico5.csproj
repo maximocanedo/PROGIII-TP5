@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AgregarSucursal.aspx" />
+    <Content Include="AgregarSucursal2Eze.aspx" />
     <Content Include="EliminarSucursal.aspx" />
     <Content Include="index.js" />
     <Content Include="ListadoSucursales.aspx" />
@@ -82,6 +83,14 @@
     <Compile Include="AgregarSucursal.aspx.designer.cs">
       <DependentUpon>AgregarSucursal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AgregarSucursal2Eze.aspx.cs">
+      <DependentUpon>AgregarSucursal2Eze.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarSucursal2Eze.aspx.designer.cs">
+      <DependentUpon>AgregarSucursal2Eze.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clase_Conexion.cs" />
     <Compile Include="EliminarSucursal.aspx.cs">
       <DependentUpon>EliminarSucursal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

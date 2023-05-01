@@ -38,14 +38,14 @@ namespace TrabajoPractico5 {
         public bool GetFromID(int id) {
             bool seHalloProvincia = false;
             Conexion conexion = new Conexion();
-            string consulta = "SELECT IdProvincia, DescripcionProvincia FROM Provincias WHERE IdProvincia = @id";
+            string consulta = "SELECT Id_Provincia, DescripcionProvincia FROM Provincias WHERE Id_Provincia = @id";
             Dictionary<string, object> parametros = new Dictionary<string, object> {
                 { "@id", id }
             };
             SqlDataReader reader = conexion.ObtenerDatos(consulta, parametros);
             if (reader.HasRows) {
                 reader.Read();
-                this.id = Convert.ToInt32(reader["IdProvincia"]);
+                this.id = Convert.ToInt32(reader["Id_Provincia"]);
                 this.descripcion = reader["DescripcionProvincia"].ToString();
                 seHalloProvincia = true;
             }

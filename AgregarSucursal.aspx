@@ -74,7 +74,7 @@
             <asp:TextBox ID="tbDireccion" CssClass="mdc-text-field__input" aria-labelledby="direccion" runat="server"></asp:TextBox>
         </label>
         <br />
-        <asp:Button ID="btnAceptar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
+        <asp:LinkButton ID="btnAceptar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

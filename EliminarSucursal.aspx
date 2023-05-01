@@ -32,7 +32,7 @@
             <asp:TextBox ID="tbIDSucursal" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
         </label>
         <br />
-        <asp:Button ID="btnEliminar" CssClass="mdc-button mdc-button--raised mdc-delete" runat="server" Text="Eliminar permanentemente" UseSubmitBehavior="False" OnClick="btnEliminar_Click" />
+        <asp:LinkButton ID="btnEliminar" CssClass="mdc-button mdc-button--raised mdc-delete" runat="server" Text="Eliminar permanentemente" UseSubmitBehavior="False" OnClick="btnEliminar_Click" />
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

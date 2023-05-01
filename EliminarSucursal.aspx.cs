@@ -17,8 +17,10 @@ namespace TrabajoPractico5 {
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e) {
-            
-            if (true) {
+            Sucursal obj = new Sucursal() {
+                id = int.Parse(tbIDSucursal.Text)
+            };
+            if (obj.Eliminar().FilasAfectadas == 1) {
                 MostrarMensaje("Registro eliminado con éxito.");
             } else {
                 MostrarMensaje("Hubo un problema al intentar eliminar el registro.");

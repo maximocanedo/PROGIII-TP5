@@ -47,11 +47,29 @@ namespace TrabajoPractico5 {
             JobResponse res = new JobResponse(cn, filasAfectadas);
             return res;
         }
+        public JobResponse Eliminar() {
+            Conexion cn = new Conexion();
+            string query = "DELETE FROM Sucursal WHERE Id_Sucursal = @id";
+            Dictionary<string, object> dict = new Dictionary<string, object>() {
+                { "@id", this.id }
+            };
+            int filasAfectadas = cn.EjecutarTransaccion(query, dict);
+            return new JobResponse(cn, filasAfectadas);
+        }
 
         public static DataSet ObtenerSucursales() {
             DataSet sucursales = new DataSet();
             Conexion cn = new Conexion();
             sucursales = cn.ObtenerDatos("SELECT [Id_Sucursal] as ID,[NombreSucursal] as Nombre,[DescripcionSucursal] as [Descripción],Provincia.DescripcionProvincia as [Provincia],[DireccionSucursal] as [Dirección]FROM [Sucursal] INNER JOIN dbo.Provincia ON Sucursal.Id_ProvinciaSucursal = Provincia.Id_Provincia");
+            return sucursales;
+        }
+        public static DataSet FiltrarSucursalesPorID(int id) {
+            DataSet sucursales = new DataSet();
+            Conexion cn = new Conexion();
+            Dictionary<string, object> dict = new Dictionary<string, object>() {
+                { "id", id }
+            }; 
+            sucursales = cn.ObtenerDatos("SELECT [Id_Sucursal] as ID,[NombreSucursal] as Nombre,[DescripcionSucursal] as [Descripción],Provincia.DescripcionProvincia as [Provincia],[DireccionSucursal] as [Dirección]FROM [Sucursal] INNER JOIN dbo.Provincia ON Sucursal.Id_ProvinciaSucursal = Provincia.Id_Provincia WHERE Id_Sucursal = @id", dict);
             return sucursales;
         }
         

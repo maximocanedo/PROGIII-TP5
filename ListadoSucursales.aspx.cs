@@ -16,7 +16,7 @@ namespace TrabajoPractico5 {
             ScriptManager.RegisterStartupScript(this, GetType(), "MostrarMensaje", script, true);
         }
         protected void CargarDatos(bool checkID = false) {
-            DataSet sucursales = Sucursal.ObtenerSucursales();
+            DataSet sucursales = checkID ? Sucursal.FiltrarSucursalesPorID(int.Parse(tbBuscarPorID.Text)) : Sucursal.ObtenerSucursales();
             gvSucursales.DataSource = sucursales.Tables["root"];
             gvSucursales.DataBind();
         }

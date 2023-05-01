@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace TrabajoPractico5 {
     public class Conexion {
@@ -11,7 +12,8 @@ namespace TrabajoPractico5 {
         public string MensajeDeError = "";
         public string DetalleError = "";
 
-        public SqlDataReader ObtenerDatos(string consulta, Dictionary<string, object> parametros = null) {
+        public DataSet ObtenerDatos(string consulta, Dictionary<string, object> parametros = null) {
+            DataSet dataSet = new DataSet();
             try {
                 using (SqlConnection conexion = new SqlConnection(Ruta)) {
                     using (SqlCommand command = new SqlCommand(consulta, conexion)) {
@@ -20,9 +22,9 @@ namespace TrabajoPractico5 {
                                 command.Parameters.AddWithValue(parametro.Key, parametro.Value);
                             }
                         }
-                        conexion.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-                        return reader;
+                        using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command)) {
+                            dataAdapter.Fill(dataSet, "root");
+                        }
                     }
                 }
             }
@@ -31,13 +33,14 @@ namespace TrabajoPractico5 {
                 HuboError = true;
                 MensajeDeError = ("Error al obtener datos de la base de datos.");
                 DetalleError = ex.ToString();
-                return null;
             }
+            return dataSet;
         }
 
 
+
         public void Cerrar(SqlDataReader cn) {
-            if(cn != null)
+            if (cn != null)
                 cn.Close();
         }
         public int EjecutarTransaccion(string consulta, Dictionary<string, object> parametros = null) {

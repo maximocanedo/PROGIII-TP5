@@ -1,10 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
 namespace TrabajoPractico5 {
+    public class JobResponse {
+        public int FilasAfectadas { get; set; }
+        public string Mensaje { get; set; }
+        public bool Estado { get; set; }
+        public object Resultado { get; set; }
+        public JobResponse(Conexion cn, int filasAfectadas = 0, object res = null) {
+            Mensaje = cn.DetalleError;
+            Estado = !cn.HuboError;
+            FilasAfectadas = filasAfectadas;
+            Resultado = res;
+        }
+    }
     public class Provincia {
         public int id { get; set; }
         public string descripcion { get; set; }
@@ -15,63 +28,28 @@ namespace TrabajoPractico5 {
         public Provincia(int id) {
             this.id = id;
         }
-        public Provincia(SqlDataReader reader) {
-            int id = Convert.ToInt32(reader["Id_Provincia"]);
-            string descripcion = reader["DescripcionProvincia"].ToString();
-        }
         public Provincia() {
             this.id = -1;
             this.descripcion = "";
         }
-        public static List<Provincia> GetProvinces() {
-            List<Provincia> provincias = new List<Provincia>();
+        public static DataSet ObtenerProvincias() {
+            DataSet provincias = new DataSet();
             Conexion cn = new Conexion();
-            string query = "SELECT [Id_Provincia], [DescripcionProvincia] FROM Provincias";
-            SqlDataReader reader = cn.ObtenerDatos(query);
-            while(reader.Read()) {
-                provincias.Add(new Provincia(reader));
-            }
-            cn.Cerrar(reader);
+            provincias = cn.ObtenerDatos("SELECT * FROM Provincia");
             return provincias;
         }
 
-        public bool GetFromID(int id) {
-            bool seHalloProvincia = false;
-            Conexion conexion = new Conexion();
-            string consulta = "SELECT Id_Provincia, DescripcionProvincia FROM Provincias WHERE Id_Provincia = @id";
-            Dictionary<string, object> parametros = new Dictionary<string, object> {
-                { "@id", id }
-            };
-            SqlDataReader reader = conexion.ObtenerDatos(consulta, parametros);
-            if (reader.HasRows) {
-                reader.Read();
-                this.id = Convert.ToInt32(reader["Id_Provincia"]);
-                this.descripcion = reader["DescripcionProvincia"].ToString();
-                seHalloProvincia = true;
-            }
-            conexion.Cerrar(reader);
-            return seHalloProvincia;
-        }
-
-        public bool WriteInDatabase() {
+        public JobResponse Escribir() {
             Conexion cn = new Conexion();
-            string consulta = "INSERT INTO Provincias (DescripcionProvincia) VALUES (@descripcion)";
-            Dictionary<String, object> parametros = new Dictionary<string, object> {
-                { "@descripcion", this.descripcion }
+            string query = "INSERT INTO Provincia (Id_Provincia, DescripcionProvincia) VALUES (@id, @descripcion)";
+            Dictionary<string, object> prs = new Dictionary<string, object>() {
+                {"@id", this.id },
+                {"@descripcion", this.descripcion }
             };
-            int filasAfectadas = cn.EjecutarTransaccion(consulta, parametros);
-            return (filasAfectadas > 0);
+            int filasAfectadas = cn.EjecutarTransaccion(query, prs);
+            JobResponse res = new JobResponse(cn, filasAfectadas);
+            return res;
         }
-        public bool DeleteFromDatabase() {
-            Conexion cn = new Conexion();
-            string consulta = "DELETE FROM Provincias WHERE [Id_Provincia] = @id";
-            Dictionary<String, object> parametros = new Dictionary<string, object> {
-                { "@id", this.id }
-            };
-            int filasAfectadas = cn.EjecutarTransaccion(consulta, parametros);
-            return (filasAfectadas > 0);
-        }
-
 
     }
 }

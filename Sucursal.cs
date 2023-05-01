@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace TrabajoPractico5 {
     public class Sucursal {
@@ -24,77 +30,47 @@ namespace TrabajoPractico5 {
         }
         public Sucursal() {
             this.id = -1;
-            this.nombre = null;
-            this.descripcion = null;
-            this.horario = 0;
-            this.provincia = null;
-            this.direccion = null;
-            this.imagen = null;
         }
-        public void SetFromReader(SqlDataReader reader) {
-            this.id = Convert.ToInt32(reader["Id_Sucursal"]);
-            this.nombre = reader["NombreSucursal"].ToString();
-            this.descripcion = reader["DescripcionSucursal"].ToString();
-            this.horario = Convert.ToInt32(reader["Id_HorarioSucursal"]);
-            Provincia p = new Provincia();
-            int idProvincia = Convert.ToInt32(reader["Id_ProvinciaSucursal"]);
-            p.GetFromID(idProvincia);
-            this.provincia = p;
-            this.direccion = reader["DireccionSucursal"].ToString();
-            this.imagen = reader["URL_Imagen_Sucursal"].ToString();
-        }
-        public Sucursal(SqlDataReader reader) {
-            SetFromReader(reader);
-        }
-        public static List<Sucursal> GetSucursales() {
-            List<Sucursal> sucursales = new List<Sucursal>();
+        public JobResponse Escribir(bool simple = true) {
             Conexion cn = new Conexion();
-            string query = "SELECT * FROM Sucursal";
-            SqlDataReader reader = cn.ObtenerDatos(query);
-            while(reader.Read()) {
-                sucursales.Add(new Sucursal(reader));
+            string query = "";
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            if (simple) {
+                query = "INSERT INTO Sucursal (NombreSucursal, DescripcionSucursal, Id_ProvinciaSucursal, DireccionSucursal) VALUES (@nombre, @descripcion, @idProvincia, @direccion)";
+                dict.Add("@nombre", this.nombre);
+                dict.Add("@descripcion", this.descripcion);
+                dict.Add("@idProvincia", this.provincia.id);
+                dict.Add("@direccion", this.direccion);
             }
-            return sucursales;
+            else { }
+            int filasAfectadas = cn.EjecutarTransaccion(query, dict);
+            JobResponse res = new JobResponse(cn, filasAfectadas);
+            return res;
         }
-        public bool GetFromID(int id) {
-            bool seHalloProvincia = false;
-            Conexion conexion = new Conexion();
-            string consulta = "SELECT * FROM Sucursal WHERE [Id_Sucursal] = @id";
-            Dictionary<string, object> parametros = new Dictionary<string, object> {
-                { "@id", id }
-            };
-            SqlDataReader reader = conexion.ObtenerDatos(consulta, parametros);
-            if (reader.HasRows) {
-                reader.Read();
-                SetFromReader(reader);
-                seHalloProvincia = true;
-            }
-            conexion.Cerrar(reader);
-            return seHalloProvincia;
-        }
-        public bool WriteInDatabase() {
+        public JobResponse Eliminar() {
             Conexion cn = new Conexion();
-            string consulta = "INSERT INTO Sucursal ([NombreSucursal],[DescripcionSucursal],[Id_HorarioSucursal],[Id_ProvinciaSucursal],[DireccionSucursal],[URL_Imagen_Sucursal])" +
-                                            "VALUES (@nombre, @descripcion, @horario, @provincia, @direccion, @imagen)";
-            Dictionary<String, object> parametros = new Dictionary<string, object> {
-                { "@nombre", this.nombre },
-                { "@descripcion", this.descripcion },
-                { "@horario", this.horario },
-                { "@provincia", this.provincia.id },
-                { "@direccion", this.direccion },
-                { "@imagen", this.imagen }
-            };
-            int filasAfectadas = cn.EjecutarTransaccion(consulta, parametros);
-            return (filasAfectadas > 0);
-        }
-        public bool DeleteFromDatabase() {
-            Conexion cn = new Conexion();
-            string consulta = "DELETE FROM Sucursal WHERE [Id_Provincia] = @id";
-            Dictionary<String, object> parametros = new Dictionary<string, object> {
+            string query = "DELETE FROM Sucursal WHERE Id_Sucursal = @id";
+            Dictionary<string, object> dict = new Dictionary<string, object>() {
                 { "@id", this.id }
             };
-            int filasAfectadas = cn.EjecutarTransaccion(consulta, parametros);
-            return (filasAfectadas > 0);
+            int filasAfectadas = cn.EjecutarTransaccion(query, dict);
+            return new JobResponse(cn, filasAfectadas);
+        }
+
+        public static DataSet ObtenerSucursales() {
+            DataSet sucursales = new DataSet();
+            Conexion cn = new Conexion();
+            sucursales = cn.ObtenerDatos("SELECT [Id_Sucursal] as ID,[NombreSucursal] as Nombre,[DescripcionSucursal] as [Descripción],Provincia.DescripcionProvincia as [Provincia],[DireccionSucursal] as [Dirección]FROM [Sucursal] INNER JOIN dbo.Provincia ON Sucursal.Id_ProvinciaSucursal = Provincia.Id_Provincia");
+            return sucursales;
+        }
+        public static DataSet FiltrarSucursalesPorID(int id) {
+            DataSet sucursales = new DataSet();
+            Conexion cn = new Conexion();
+            Dictionary<string, object> dict = new Dictionary<string, object>() {
+                { "id", id }
+            };
+            sucursales = cn.ObtenerDatos("SELECT [Id_Sucursal] as ID,[NombreSucursal] as Nombre,[DescripcionSucursal] as [Descripción],Provincia.DescripcionProvincia as [Provincia],[DireccionSucursal] as [Dirección]FROM [Sucursal] INNER JOIN dbo.Provincia ON Sucursal.Id_ProvinciaSucursal = Provincia.Id_Provincia WHERE Id_Sucursal = @id", dict);
+            return sucursales;
         }
 
 

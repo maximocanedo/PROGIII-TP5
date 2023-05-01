@@ -19,7 +19,8 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         
         <br>
-        <h1 class="mdc-typography--headline4">Agregar una sucursal</h1>
+        <h1  class="mdc-typography--headline4">Agregar una sucursal</h1>
+        <br />
         <br />
         <label class="mdc-text-field mdc-text-field--outlined">
             <span class="mdc-notched-outline">

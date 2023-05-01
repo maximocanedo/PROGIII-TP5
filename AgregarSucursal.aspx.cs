@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,8 +20,8 @@ namespace TrabajoPractico5 {
              * tbDireccion (TextBox)
              * btnAceptar (Button)
              */
-            Negocio sucursal = new Negocio();
-            ddlProvincias.DataSource = sucursal.ObtenerProvincias();
+            DataSet p = Provincia.ObtenerProvincias();
+            ddlProvincias.DataSource = p.Tables["root"];
             ddlProvincias.DataTextField = "DescripcionProvincia";
             ddlProvincias.DataValueField = "Id_Provincia";
             ddlProvincias.DataBind();
@@ -33,15 +34,22 @@ namespace TrabajoPractico5 {
 
         }
         protected void btnAceptar_Click(object sender, EventArgs e) {
-            Negocio sucursal = new Negocio();
-            string nombre = tbNombreSucursal.Text;
-            string descripcion = tbDescripcion.Text;
-            string provincia = ddlProvincias.SelectedValue;
-            string direccion = tbDireccion.Text;
-            if(sucursal.AgregarSucursal(nombre, descripcion, provincia, direccion) != 0) {
+            string n = tbNombreSucursal.Text;
+            string d = tbDescripcion.Text;
+            int idProvincia = int.Parse(ddlProvincias.SelectedValue);
+            string dir = tbDireccion.Text;
+            Sucursal s = new Sucursal() {
+                nombre = n,
+                descripcion = d,
+                provincia = new Provincia() { id = idProvincia },
+                direccion = dir
+            };
+            JobResponse job = s.Escribir();
+            if (job.Estado) {
                 MostrarMensaje("El registro se subió correctamente.");
             } else {
-                MostrarMensaje("Hubo un problema al intentar escribir en la base de datos. ");
+                MostrarMensaje("Error. " + job.Mensaje);
+                
             }
             LimpiarCampos();
         }

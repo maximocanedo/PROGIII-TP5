@@ -25,7 +25,7 @@ namespace TrabajoPractico5
 
 
 
-        public int ejecutaTransaccion(String consulta)// insertar,eliminar o modificar
+        public static int ejecutaTransaccion(String consulta)// insertar,eliminar o modificar
         {
             SqlConnection conexion = new SqlConnection(ruta);
             conexion.Open();

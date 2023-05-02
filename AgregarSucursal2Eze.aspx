@@ -4,6 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <style type="text/css">
@@ -16,15 +18,25 @@
         .auto-style3 {
             width: 273px;
         }
+        .auto-style4 {
+            font-size: x-large;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/AgregarSucursal2Eze.aspx">Agregar Sucursal</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ListadoSucursales.aspx">Listado Sucursales</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/EliminarSucursal.aspx">Eliminar Sucursal</asp:HyperLink>
             <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GRUPO Nº<br />
             <br />
-&nbsp;&nbsp;&nbsp; AGREGAR SUCURSAL<br />
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="auto-style4"><strong>GRUPO Nº</strong></span><br />
+            <br />
+&nbsp;&nbsp;&nbsp; <strong>AGREGAR SUCURSAL</strong><br />
             <br />
             <table class="auto-style1">
                 <tr>
@@ -33,7 +45,7 @@
                         <asp:TextBox ID="txtNombreSucursal" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombreSucursal"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombreSucursal" ErrorMessage="*" ValidationGroup="1"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -42,7 +54,7 @@
                         <asp:TextBox ID="txtDescripcion" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server" ErrorMessage="*" ControlToValidate="txtDescripcion"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvDescripcion" runat="server" ControlToValidate="txtDescripcion" ErrorMessage="*"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -59,7 +71,7 @@
                         <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ControlToValidate="txtDireccion" ErrorMessage="*"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>
@@ -70,9 +82,11 @@
                 <tr>
                     <td class="auto-style2">&nbsp;</td>
                     <td class="auto-style3">
-                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" />
+                        <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
                     </td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <asp:Label ID="Label1" runat="server"></asp:Label>
+                    </td>
                 </tr>
             </table>
             <br />

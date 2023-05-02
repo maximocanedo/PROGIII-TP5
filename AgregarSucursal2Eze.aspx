@@ -4,7 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
@@ -45,7 +47,7 @@
                         <asp:TextBox ID="txtNombreSucursal" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombreSucursal" ErrorMessage="*" ValidationGroup="1"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombreSucursal" ErrorMessage="*"></asp:RequiredFieldValidator>
                     </td>
                 </tr>
                 <tr>

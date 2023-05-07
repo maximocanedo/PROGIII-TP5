@@ -7,16 +7,20 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace TrabajoPractico5 {
-    // Definir la clase Sucursal
-    
+namespace TrabajoPractico5 {    
     public partial class ListadoSucursales : System.Web.UI.Page {
         private void MostrarMensaje(string mensaje) {
             string script = "MostrarMensaje('" + mensaje + "');";
             ScriptManager.RegisterStartupScript(this, GetType(), "MostrarMensaje", script, true);
         }
-        protected void CargarDatos(bool checkID = false) {
-            DataSet sucursales = checkID ? Sucursal.FiltrarSucursalesPorID(int.Parse(tbBuscarPorID.Text)) : Sucursal.ObtenerSucursales();
+        /// <summary>
+        /// Carga los registros de los sucursales en la tabla @gvSucursales.
+        /// </summary>
+        /// <param name="seFiltra">Indica si se debe filtrar por el ID especificado por el usuario.</param>
+        protected void CargarDatos(bool seFiltra = false) {
+            DataSet sucursales = seFiltra?
+                Sucursal.FiltrarSucursalesPorID(int.Parse(tbBuscarPorID.Text)):
+                Sucursal.ObtenerSucursales();
             gvSucursales.DataSource = sucursales.Tables["root"];
             gvSucursales.DataBind();
         }
@@ -25,7 +29,6 @@ namespace TrabajoPractico5 {
                 CargarDatos();
             }
         }
-
         protected void btnBuscar_Click(object sender, EventArgs e) {
             MostrarMensaje("Recargando los resultados...");
             CargarDatos(true);

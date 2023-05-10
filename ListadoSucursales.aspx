@@ -33,7 +33,7 @@
             <asp:LinkButton ID="btnBuscar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
         </div>
         <br />
-        <asp:GridView ID="GridView1" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
+        <asp:GridView ID="gvSucursales" CssClass="mdc-typography--body2" runat="server"></asp:GridView>
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

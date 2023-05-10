@@ -40,6 +40,15 @@ namespace TrabajoPractico5 {
         protected global::System.Web.UI.WebControls.TextBox tbIDSucursal;
 
         /// <summary>
+        /// rfv1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfv1;
+
+        /// <summary>
         /// btnEliminar control.
         /// </summary>
         /// <remarks>

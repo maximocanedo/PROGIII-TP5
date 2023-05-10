@@ -17,7 +17,15 @@ namespace TrabajoPractico5 {
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e) {
-            MostrarMensaje("¡Evento click del @btnEliminar activado!");
+            var miSucursal = new Sucursal() { id = int.Parse(tbIDSucursal.Text) };
+            var response = miSucursal.Eliminar();
+            tbIDSucursal.Text = "";
+            MostrarMensaje(
+                response.FilasAfectadas == 1 
+                ? "El registro #" + miSucursal.id + " fue eliminado exitósamente de la base de datos. "
+                : "Hubo un problema al intentar eliminar el registro especificado. "
+                );
+            
         }
     }
 }

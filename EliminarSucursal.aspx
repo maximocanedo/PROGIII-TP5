@@ -29,10 +29,13 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- TextBox @tbNombreSucursal -->
-            <asp:TextBox ID="tbIDSucursal" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbIDSucursal" required minlength="1" type="number" ValidationGroup="A" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
         </label>
+        <div class="mdc-text-field-helper-line">
+            <asp:RequiredFieldValidator ID="rfv1" CssClass="mdc-text-field-helper-text" aria-hidden="true" ControlToValidate="tbIDSucursal" runat="server" ErrorMessage="" ValidationGroup="A" SetFocusOnError="True" Text="Ingresá un ID válido"></asp:RequiredFieldValidator>
+        </div>
         <br />
-        <asp:LinkButton ID="btnEliminar" CssClass="mdc-button mdc-button--raised mdc-delete" runat="server" Text="Eliminar permanentemente" UseSubmitBehavior="False" OnClick="btnEliminar_Click" />
+        <asp:LinkButton ID="btnEliminar" ValidationGroup="A" CssClass="mdc-button mdc-button--raised mdc-delete" runat="server" Text="Eliminar permanentemente" UseSubmitBehavior="False" OnClick="btnEliminar_Click" />
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

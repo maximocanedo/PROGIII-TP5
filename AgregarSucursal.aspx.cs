@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -19,6 +20,14 @@ namespace TrabajoPractico5 {
              * tbDireccion (TextBox)
              * btnAceptar (Button)
              */
+            if(!IsPostBack) {
+                DataSet provincias = Provincia.ObtenerProvincias();
+                ddlProvincias.DataSource = provincias.Tables[0];
+                ddlProvincias.DataValueField = "Id_Provincia";
+                ddlProvincias.DataTextField = "DescripcionProvincia";
+                ddlProvincias.DataBind();
+                ddlProvincias.Items.Insert(0, new ListItem("Seleccioná una provincia", "__NoProvinceSelected"));
+            }
             
         }
         protected void LimpiarCampos() {
@@ -29,8 +38,18 @@ namespace TrabajoPractico5 {
 
         }
         protected void btnAceptar_Click(object sender, EventArgs e) {
-            MostrarMensaje("¡Evento click del @btnAceptar activado!"); // Ejemplo de cómo usar MostrarMensaje. (¡Probalo!)
-            LimpiarCampos();
+            var miSucursal = new Sucursal() {
+                nombre = tbNombreSucursal.Text,
+                descripcion = tbDescripcion.Text,
+                provincia = new Provincia() { id = int.Parse(ddlProvincias.SelectedValue) },
+                direccion = tbDireccion.Text
+            };
+            var response = miSucursal.Escribir();
+            if (response.FilasAfectadas == 1) {
+                LimpiarCampos();
+                MostrarMensaje("El registro se ha agregado con éxito. ");
+            }
+            
         }
     }
 }

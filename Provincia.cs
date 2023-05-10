@@ -6,12 +6,12 @@ using System.Linq;
 using System.Web;
 
 namespace TrabajoPractico5 {
-    public class JobResponse {
+    public class TransactionResponse {
         public int FilasAfectadas { get; set; }
         public string Mensaje { get; set; }
         public bool Estado { get; set; }
         public object Resultado { get; set; }
-        public JobResponse(Conexion cn, int filasAfectadas = 0, object res = null) {
+        public TransactionResponse(Conexion cn, int filasAfectadas = 0, object res = null) {
             Mensaje = cn.DetalleError;
             Estado = !cn.HuboError;
             FilasAfectadas = filasAfectadas;
@@ -39,7 +39,7 @@ namespace TrabajoPractico5 {
             return provincias;
         }
 
-        public JobResponse Escribir() {
+        public TransactionResponse Escribir() {
             Conexion cn = new Conexion();
             string query = "INSERT INTO Provincia (Id_Provincia, DescripcionProvincia) VALUES (@id, @descripcion)";
             Dictionary<string, object> prs = new Dictionary<string, object>() {
@@ -47,7 +47,7 @@ namespace TrabajoPractico5 {
                 {"@descripcion", this.descripcion }
             };
             int filasAfectadas = cn.EjecutarTransaccion(query, prs);
-            JobResponse res = new JobResponse(cn, filasAfectadas);
+            var res = new TransactionResponse(cn, filasAfectadas);
             return res;
         }
 

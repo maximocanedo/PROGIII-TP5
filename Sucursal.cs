@@ -31,7 +31,7 @@ namespace TrabajoPractico5 {
         public Sucursal() {
             this.id = -1;
         }
-        public JobResponse Escribir(bool simple = true) {
+        public TransactionResponse Escribir(bool simple = true) {
             Conexion cn = new Conexion();
             string query = "";
             Dictionary<string, object> dict = new Dictionary<string, object>();
@@ -44,17 +44,17 @@ namespace TrabajoPractico5 {
             }
             else { }
             int filasAfectadas = cn.EjecutarTransaccion(query, dict);
-            JobResponse res = new JobResponse(cn, filasAfectadas);
+            var res = new TransactionResponse(cn, filasAfectadas);
             return res;
         }
-        public JobResponse Eliminar() {
+        public TransactionResponse Eliminar() {
             Conexion cn = new Conexion();
             string query = "DELETE FROM Sucursal WHERE Id_Sucursal = @id";
             Dictionary<string, object> dict = new Dictionary<string, object>() {
                 { "@id", this.id }
             };
             int filasAfectadas = cn.EjecutarTransaccion(query, dict);
-            return new JobResponse(cn, filasAfectadas);
+            return new TransactionResponse(cn, filasAfectadas);
         }
 
         public static DataSet ObtenerSucursales() {

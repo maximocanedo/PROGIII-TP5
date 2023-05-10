@@ -29,8 +29,11 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- TextBox @tbNombreSucursal -->
-            <asp:TextBox ID="tbNombreSucursal" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbNombreSucursal" required minlength="1" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server" ValidationGroup="A"></asp:TextBox>
         </label>
+        <div class="mdc-text-field-helper-line">
+            <asp:RequiredFieldValidator ID="rfv1" CssClass="mdc-text-field-helper-text" aria-hidden="true" ControlToValidate="tbNombreSucursal" runat="server" ErrorMessage="" ValidationGroup="A" SetFocusOnError="True" Text="Tenés que ingresar un nombre."></asp:RequiredFieldValidator>
+        </div>
         <br />
         <label class="mdc-text-field mdc-text-field--outlined">
             <span class="mdc-notched-outline">
@@ -41,8 +44,13 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- TextBox @tbDescripcion -->
-            <asp:TextBox ID="tbDescripcion" aria-labelledby="descripcion" CssClass="mdc-text-field__input" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbDescripcion" required minlength="1" ValidationGroup="A" aria-labelledby="descripcion" CssClass="mdc-text-field__input" runat="server"></asp:TextBox>
+       
+        
         </label>
+         <div class="mdc-text-field-helper-line">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" CssClass="mdc-text-field-helper-text" aria-hidden="true" ControlToValidate="tbDescripcion" runat="server" ErrorMessage="" ValidationGroup="A" SetFocusOnError="True" Text="Tenés que ingresar una descripción."></asp:RequiredFieldValidator>
+        </div>
         <br />
         <label class="mdc-text-field mdc-text-field--outlined">
             <span class="mdc-notched-outline">
@@ -53,14 +61,14 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- DropDownList @ddlProvincias -->
-            <asp:DropDownList ID="ddlProvincias" CssClass="mdc-text-field__input" aria-labelledby="my-label-id3" runat="server">
-                <asp:ListItem>Buenos Aires</asp:ListItem>
-                <asp:ListItem>Córdoba</asp:ListItem>
-                <asp:ListItem>Santa Fe</asp:ListItem>
-                <asp:ListItem>Mendoza</asp:ListItem>
-                <asp:ListItem>Entre Ríos</asp:ListItem>
+            <asp:DropDownList ID="ddlProvincias" required ValidationGroup="A" CssClass="mdc-text-field__input" aria-labelledby="my-label-id3" runat="server">
+              
             </asp:DropDownList>
+            
         </label>
+        <div class="mdc-text-field-helper-line">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" CssClass="mdc-text-field-helper-text" aria-hidden="true" ControlToValidate="ddlProvincias" runat="server" ErrorMessage="" ValidationGroup="A" SetFocusOnError="True" Text="Tenés que seleccionar una provincia." InitialValue="__NoProvinceSelected"></asp:RequiredFieldValidator>
+        </div>
         <br />
         <label class="mdc-text-field mdc-text-field--outlined">
             <span class="mdc-notched-outline">
@@ -71,10 +79,13 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- TextBox @tbDireccion -->
-            <asp:TextBox ID="tbDireccion" CssClass="mdc-text-field__input" aria-labelledby="direccion" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbDireccion" required minlength="1" ValidationGroup="A" CssClass="mdc-text-field__input" aria-labelledby="direccion" runat="server"></asp:TextBox>
         </label>
+        <div class="mdc-text-field-helper-line">
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" CssClass="mdc-text-field-helper-text" aria-hidden="true" ControlToValidate="tbDireccion" runat="server" ErrorMessage="" ValidationGroup="A" SetFocusOnError="True" Text="Tenés que ingresar una dirección."></asp:RequiredFieldValidator>
+        </div>
         <br />
-        <asp:LinkButton ID="btnAceptar" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
+        <asp:LinkButton ID="btnAceptar"  ValidationGroup="A" CssClass="mdc-button mdc-button--raised" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" UseSubmitBehavior="False" />
 
         <aside class="mdc-snackbar">
             <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">

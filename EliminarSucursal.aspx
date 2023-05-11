@@ -29,7 +29,7 @@
                 <span class="mdc-notched-outline__trailing"></span>
             </span>
             <!-- TextBox @tbNombreSucursal -->
-            <asp:TextBox ID="tbIDSucursal" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="tbIDSucursal" CssClass="mdc-text-field__input" aria-labelledby="my-label-id1" runat="server" TextMode="Number"></asp:TextBox>
         </label>
         <br />
         <asp:LinkButton ID="btnEliminar" CssClass="mdc-button mdc-button--raised mdc-delete" runat="server" Text="Eliminar permanentemente" UseSubmitBehavior="False" OnClick="btnEliminar_Click" />
